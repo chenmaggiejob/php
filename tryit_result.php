@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHP Web Technology</title>
+    <title>tryit result</title>
 </head>
 <body>
-    <a href="bmi.php">網頁傳值</a>
+    <h2>BMI計算結果</h2>
+    <?php
+        
+        
+        
+    ?>
+    
 </body>
 </html>
