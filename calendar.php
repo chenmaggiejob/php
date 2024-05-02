@@ -21,6 +21,7 @@
             width: 380px;
             display: flex;
             flex-wrap: wrap;
+            justify-content: center;
         }
 
         .item {
@@ -70,13 +71,14 @@
 </head>
 
 <body>
-    <h2>萬年曆</h2>
+    <h2 style="width: 384px;text-align:center">萬年曆</h2>
     <!-- <form action="?" method="get">
         <label for="month"></label>
         <input type="number" name='month' value="<?= date("m"); ?>">
         <input type="submit" value="送出">
     </form> -->
     <?php
+
     // if(isset($_GET['month'])){
 
     //     $month=$_GET['month'];
@@ -87,28 +89,14 @@
     //三元運算式寫法
     // $month=(isset($_GET['month']))?$_GET['month']:date("m");
     // $year=(isset($_GET['year']))?$_GET['year']:date("Y");
-
+    
     //特製化的三元運算式，只能用在isset且只有1個判斷式才能使用該寫法
     $month = $_GET['month'] ?? date("m");
     $year = $_GET['year'] ?? date("Y");
-
-
-    $year = date("Y");
-    echo "年" . $year;
-    echo "<BR>";
-    echo "月份:" . $month;
-    echo "<br>";
-    $firstDay = strtotime(date("Y-$month-1"));
+    $firstDay = strtotime(date("$year-$month-1"));
     $firstWeekStartDay = date("w", $firstDay);
-    echo "第一周的開始是第" . $firstWeekStartDay . "日";
     $days = date("t", $firstDay);
     $lastDay = strtotime(date("Y-$month-$days"));
-    echo "<br>";
-    echo "最後一天是" . date("Y-m-d", $lastDay);
-
-    ?>
-
-    <?php
 
     $days = [];
     for ($i = 0; $i < 42; $i++) {
@@ -120,27 +108,34 @@
         $prev = 12;
         $prev_year = $year - 1;
     } else {
-        $perv = $month - 1;
+        $prev = $month - 1;
+        $prev_year = $year;
     }
 
     if ($month + 1 > 12) {
         $next = 1;
         $next_year = $year + 1;
+    } else {
+        $next = $month + 1;
+        $next_year = $year;
     }
 
     ?>
-
     <div style="width:384px;">
-    <div class = "nav" style = "text-align: left"></div>
-    <div class = "nav" style = "text-align: left"></div>
-    <div class = "nav" style = "text-align: left"></div>
-        <a href="calendar.php?month=<?= $prev_year; ?> & month = <?= $preve; ?>" style="float:left">上一個月</a>
-        <a href="calendar.php?month=<?= $next_year; ?> & month = <?= $next;?>" style="float:right">下一個月</a>
+        <div class="nav" style="text-align: left;">
+            <a href="calendar.php?year=<?= $prev_year; ?>&month=<?= $prev; ?>">上一個月</a>
+
+        </div>
+        <div class="nav" style="text-align: center;">
+
+            <?= $year; ?>年 <?= $month; ?>月
+        </div>
+        <div class="nav" style="text-align: right;">
+            <a href="calendar.php?year=<?= $next_year; ?>&month=<?= $next; ?>">下一個月</a>
+
+        </div>
     </div>
 
-    <div style='clear:both'></div>
-
-    <h3><?= $year; ?>年 <?= $month; ?>月</h3>
     <?php
 
     echo "<div class='block-table'>";
@@ -169,4 +164,5 @@
     ?>
 
 </body>
+
 </html>
