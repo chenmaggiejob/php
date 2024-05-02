@@ -62,6 +62,11 @@
         </div>
     </form>
 
+    <h2>使用A標籤來代替get傳值</h2>
+    <a href="bmi_result.php?weight=100&height=180">計算BMI</a>
+<hr>
+
+    
 </body>
 
 </html>
