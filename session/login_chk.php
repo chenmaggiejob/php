@@ -1,12 +1,17 @@
 <?php
+
+session_start();
 $acc = $_POST['acc'];
 $pw = $_POST['pw'];
 
 if ($acc == 'admin' && $pw == '1234') {
 //正確
-header('location:login_result.php?acc='.$acc );
+$_SESSION['login'] = $acc;
+header('location:login_result.php');
 } else {
-    header("location:login_error.php?acc=".$acc);
+    //如果有一個不正確
+    $_SESSION['error'] = '帳號或密碼錯誤';
+    header("location:login_error.php");
 }
 
 ?>
