@@ -57,11 +57,26 @@
 </head>
 
 <body>
-    <?php include_once "./layouts/header.php";?>
-    <?php include_once "./layouts/nav.php";?>
-    <?php include_once "./layouts/marquee.php";?>
-   
-    <main>主要內容</main>
+
+    <?php $page = isset($_GET['page'])?$_GET['page']:'index';?>
+    <?php include_once "./layouts/header.php"; ?>
+    <?php include_once "./layouts/nav.php"; ?> 
+    <?php include_once "./layouts/marquee.php"; ?>
+        
+    <?php
+
+    $file = "./pages/{$page}.php";
+
+    if (file_exists($file)) {
+
+        include $file;
+
+    } else {
+
+        include "./pages/main.php";
+    }
+
+    ?>
     <footer>頁腳</footer>
 
 
