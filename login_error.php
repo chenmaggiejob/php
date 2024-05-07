@@ -10,11 +10,9 @@
 <body>
     <h2>帳號或密碼錯誤</h2>
 
-    <!-- <?php
-
-    $acc = $_GET['acc'];
-
-    ?> -->
+    <?php
+    //$acc = $_GET['acc'];
+    ?>
 
     帳號<span style='color:red'><?=$_GET['acc'];?></span>不存在
     <br>
