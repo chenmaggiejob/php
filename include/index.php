@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MY PHP</title>
     <style>
         body {
-            width:1000px;
+            width: 1000px;
             height: 100vh;
             margin: auto;
             padding: 10px;
@@ -54,18 +55,16 @@
         }
     </style>
 </head>
+
 <body>
-<header>首頁標題</header>
-<nav>
-    <a href="index.php">首頁</a>
-    <a href="news.php">最新消息</a>
-    <a href="products.php">產品介紹</a>
-    <a href="contact.php">聯絡我們</a>
-</nav>
-<marquee behavior="" direction="">這是一段跑馬燈</marquee>
-<main>主要內容</main>
-<footer>頁腳</footer>
+    <?php include_once "./layouts/header.php";?>
+    <?php include_once "./layouts/nav.php";?>
+    
+    <marquee behavior="" direction="">這是一段跑馬燈</marquee>
+    <main>主要內容</main>
+    <footer>頁腳</footer>
 
 
 </body>
+
 </html>
