@@ -1,0 +1,1 @@
+<marquee behavior="" direction="">這是一段跑馬燈</marquee>

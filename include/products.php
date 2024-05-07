@@ -60,7 +60,8 @@
 <body>
     <?php include_once "./layouts/header.php"; ?>
     <?php include_once "./layouts/nav.php"; ?>
-    <marquee behavior="" direction="">這是一段跑馬燈</marquee>
+    <?php include_once "./layouts/marquee.php";?>
+
     <main>產品介紹</main>
     <footer>頁腳</footer>
 
