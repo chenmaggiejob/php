@@ -63,7 +63,7 @@
     <a href="contact.php">聯絡我們</a>
 </nav>
 <marquee behavior="" direction="">這是一段跑馬燈</marquee>
-<main>主要內容</main>
+<main>最新消息</main>
 <footer>頁腳</footer>
 
 
