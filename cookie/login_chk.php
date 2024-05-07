@@ -4,9 +4,12 @@ $pw = $_POST['pw'];
 
 if ($acc == 'admin' && $pw == '1234') {
 //正確
-header('location:login_result.php?acc='.$acc );
+setcookie('login',$acc,time()+60);
+header('location:login_result.php');
 } else {
-    header("location:login_error.php?acc=".$acc);
+    
+    setcookie('error','帳號或密碼錯誤',time()+60);
+    header("location:login.php");
 }
 
 ?>

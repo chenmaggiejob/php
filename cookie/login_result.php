@@ -7,16 +7,14 @@
 </head>
 <body>
     <h2>登入成功</h2>
-<!-- <?php
 
-$acc= $_GET['acc'];
-
-?> -->
 
 <!-- 直接echo的速寫法 -->
-歡迎<?=$_GET['acc'];?>
+歡迎<?=$_COOKIE['login'];?>
 <br>
-<a href="login.php?login=1" >回登入頁</a>
+<a href="login.php" >回登入頁</a>
+<br>
+<a href="logout.php" >登出帳號</a>
     
 </body>
 </html>
