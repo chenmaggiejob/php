@@ -1,3 +1,10 @@
+<?php
+
+$dsn = "mysql:host=localhost;charset=utf8;dbname=school";
+$pdo = new PDO($dsn, 'root', '');
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,12 +15,30 @@
 </head>
 
 <body>
+
     <a href="./insert.php"></a>
 
     <h1>新增學員</h1>
+
+    <?php
+    if (isset($_GET['error'])) {
+        echo "<span style='color:red'>";
+        echo $_GET['error'];
+        echo "</span>";
+    }
+    ?>
+
     <form action="save.php" method="post">
         <div>
-            <label for="school_num">學號</label><input type="number" min ="1" name="school_num" id="school_num">
+            <label for="school_num">學號</label>
+            <?php
+            $max = $pdo->query("select max(`school_num`) as 'max' from `students`")->fetch(PDO::FETCH_ASSOC);
+
+            echo $max['max'] + 1;
+            // print_r($max['max'] + 1);
+
+            ?>
+            <input type="hidden" min="1" name="school_num" id="school_num" value="<?= $max['max'] + 1 ?>">
         </div>
 
         <div>
@@ -43,19 +68,40 @@
         <div>
             <label for="dept">科系</label>
             <select name="dept" id="dept">
-                <option value="1">商業經營科</option>
+
+                <?php
+                $depts = $pdo->query('select * from dept')->fetchAll();
+
+                foreach ($depts as $dept) {
+                    echo
+                    "<option value = '{$dept['id']}'>{$dept['name']} </option>";
+                }
+                ?>
+
+                <!-- <option value="1">商業經營科</option>
                 <option value="2">國際貿易科</option>
                 <option value="3">資料處理科</option>
                 <option value="4">幼兒保育科</option>
                 <option value="5">美容科</option>
-                <option value="6">室內佈置科</option>
+                <option value="6">室內佈置科</option> -->
             </select>
         </div>
 
         <div>
-            <label for="graduate_at">畢業學校</label><input type="text" name="graduate_at" id="graduate_at">
+            <label for="graduate_at">畢業學校</label>
+            <select name="graduate_at" id="graduate_at">
+
+                <?php
+                $schools = $pdo->query('select * from graduate_school')->fetchAll();
+
+                foreach ($schools as $school) {
+                    echo
+                    "<option value = '{$school['id']}'>{$school['county']}{$school['name']} </option>";
+                }
+                ?>
+            </select>
         </div>
-        
+
         <div>
             <label for="status_code">畢業狀態</label>
             <select name="status_code" id="status_code">
