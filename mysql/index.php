@@ -1,4 +1,18 @@
+<style>
+    * { 
+        box-sizing: border-box;
+    }
 
+    table {
+
+        border-collapse: collapse;
+    }
+
+    td {
+        padding: 5px 10px;
+        border: 1px solid gray;
+    }
+</style>
 <a href="./insert.php"> 新增學員 </a>
 
 <?php
