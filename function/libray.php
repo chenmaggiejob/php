@@ -1,5 +1,22 @@
 <?php
 
+echo sum(10,25);
+function sum($a , $b) {
+ return $a + $b;
+}
+
+echo "<hr>";
+
+// 不定參數
+echo sums(10,20,30,40,50);
+function sums(...$args) {
+    $sum = 0;
+    foreach ($args as $arg) {
+        $sum += $arg;
+    }
+    return $sum;
+}
+
 //在頁面上快速顯示陣列內容
 function dd($array)
 {

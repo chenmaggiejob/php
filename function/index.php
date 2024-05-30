@@ -11,6 +11,8 @@
     <li><h3><a href="./star.php">start-將函式直接寫在程式碼內畫出星星</a></h3></li>
     <li><h3><a href="./stars_include.php">start-include-引用libray函式畫出星星</a></h3></li>
     <li><h3><a href="./db_include.php">db-include-引用db函式帶出資料</a></h3></li>
+    <li><h3><a href="./libray.php">libray</a></h3></li>
+    <li><h3><a href="./db_func.php">db-func</a></h3></li>
 </ul>
 </body>
 

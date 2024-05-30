@@ -63,6 +63,19 @@ function findsabbr($table, $arg)
     return $row;
 }
 
+//將update與insert整合版
+function save($table, $array)
+{
+
+    if (isset($array['id'])) {
+        //update
+        update($table, $array, $array['id']);
+    } else {
+        //insert
+        insert($table, $array);
+    }
+}
+
 function update($table, $cols, $arg)
 {
     global $pdo;
@@ -77,12 +90,12 @@ function update($table, $cols, $arg)
 
     if (is_array($arg)) {
         foreach ($arg as $key => $value) {
-            $tmp[] = "`$key`='{$value}'";
+            $tt[] = "`$key`='{$value}'";
         }
 
-        $sql .= "WHERE " . join(" && ", $tmp);
+        $sql .= " WHERE " . join(" && ", $tt);
     } else {
-        $sql .= "WHERE `id`='{$arg}'";
+        $sql .= " WHERE `id`='{$arg}'";
     }
 
     return $pdo->exec($sql);
@@ -97,8 +110,6 @@ function insert($table, $cols)
     $sql .= "(`" . join("`,`", array_keys($cols)) . "`)";
 
     $sql .= " VALUES('" . join("','", $cols) . "')";
-
-    //echo $sql;
 
     return $pdo->exec($sql);
 }
@@ -120,6 +131,23 @@ function del($table, $arg)
     }
 
     return $pdo->exec($sql);
+}
+
+//將foreach 提取出來變成FUNC 使用
+function array2sql($array)
+{
+    foreach ($array as $key => $value) {
+        $tmp[] = "`$key`='$value'";
+    }
+
+    return $tmp;
+}
+
+//將 return $pdo->query($sql)->fetchAll(); 提取出來變成 func 使用
+function q($sql)
+{
+    global $pdo;
+    return $pdo->query($sql)->fetchAll();
 }
 
 

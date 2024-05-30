@@ -24,6 +24,9 @@ include_once "db_func.php";
     echo "<hr>";
     echo "findssabbr的函式引用結果";
     dd(findsabbr('students', ['uni_id' => 'F200000035', 'parents' => '孔進豐']));
+    echo "<hr>";
+    echo "update的函式引用結果";
+    update('students',['dept' => '3'],3);
 
     
 
