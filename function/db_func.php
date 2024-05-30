@@ -38,6 +38,91 @@ function finds($table, $arg)
     return $row;
 }
 
+//finds 的 func 精簡版
+function findsabbr($table, $arg)
+{
+    global $pdo;
+
+    $sql = "SELECT * FROM `{$table}` WHERE ";
+
+    if (is_array($arg)) {
+
+        foreach ($arg as $key => $value) {
+            $tmp[] = " `$key` = '{$value}' ";
+        }
+
+        $sql .= join(" && ", $tmp);
+    } else {
+
+        $sql .= " `id` = '{$arg}' ";
+    }
+
+    //echo $sql;
+    $row = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+    return $row;
+}
+
+function update($table, $cols, $arg)
+{
+    global $pdo;
+
+    $sql = "UPDATE `{$table}` SET ";
+
+    foreach ($cols as $key => $value) {
+        $tmp[] = "`$key`='{$value}'";
+    }
+
+    $sql .= join(",", $tmp);
+
+    if (is_array($arg)) {
+        foreach ($arg as $key => $value) {
+            $tmp[] = "`$key`='{$value}'";
+        }
+
+        $sql .= "WHERE " . join(" && ", $tmp);
+    } else {
+        $sql .= "WHERE `id`='{$arg}'";
+    }
+
+    return $pdo->exec($sql);
+}
+
+function insert($table, $cols)
+{
+    global $pdo;
+
+    $sql = "INSERT INTO `{$table}` ";
+
+    $sql .= "(`" . join("`,`", array_keys($cols)) . "`)";
+
+    $sql .= " VALUES('" . join("','", $cols) . "')";
+
+    //echo $sql;
+
+    return $pdo->exec($sql);
+}
+
+function del($table, $arg)
+{
+    global $pdo;
+
+    $sql = "DELETE FROM `{$table}` WHERE ";
+
+    if (is_array($arg)) {
+        foreach ($arg as $key => $value) {
+            $tmp[] = "`$key`='{$value}'";
+        }
+
+        $sql .= join(" && ", $tmp);
+    } else {
+        $sql .= " `id`='{$arg}'";
+    }
+
+    return $pdo->exec($sql);
+}
+
+
 
 /**
  * 在頁面上快速顯示陣列內容

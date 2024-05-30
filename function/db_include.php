@@ -19,7 +19,11 @@ include_once "db_func.php";
     echo "<hr>";
     dd(find('students',3));
     echo "<hr>";
+    echo "finds的函式引用結果";
     dd(finds('students', ['uni_id' => 'F200000035', 'parents' => '孔進豐']));
+    echo "<hr>";
+    echo "findssabbr的函式引用結果";
+    dd(findsabbr('students', ['uni_id' => 'F200000035', 'parents' => '孔進豐']));
 
     
 
