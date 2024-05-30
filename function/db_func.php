@@ -3,7 +3,7 @@
 $dsn = "mysql:host=localhost;charset=utf8;dbname=school";
 $pdo = new PDO($dsn, 'root', '');
 
-function all($table,$where)
+function all($table, $where)
 {
     global $pdo;
     $sql = "SELECT * FROM `{$table}` {$where}";
@@ -11,10 +11,28 @@ function all($table,$where)
     return $rows;
 }
 
-function find($id)
+function find($table, $id)
 {
     global $pdo;
-    $sql = "SELECT * FROM `dept` WHERE `id`='{$id}'";
+    $sql = "SELECT * FROM `{$table}` WHERE `id`='{$id}'";
+    $row = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+    return $row;
+}
+
+function finds($table, $arg)
+{
+    global $pdo;
+    if (is_array($arg)) {
+        foreach ($arg as $key => $value) {
+            $tmp[] = "`$key`='{$value}'";
+        }
+        $sql = "SELECT * FROM `{$table}` WHERE " . join(" && ", $tmp);
+    } else {
+        $sql = "SELECT * FROM `{$table}` WHERE `id`='{$arg}'";
+    }
+
+    //echo $sql;
     $row = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
 
     return $row;

@@ -16,7 +16,12 @@ include_once "db_func.php";
     <?php
 
     dd(all('students', " WHERE `id`<5"));
-    dd(find(3));
+    echo "<hr>";
+    dd(find('students',3));
+    echo "<hr>";
+    dd(finds('students', ['uni_id' => 'F200000035', 'parents' => '孔進豐']));
+
+    
 
     ?>
 </body>
