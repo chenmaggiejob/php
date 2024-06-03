@@ -18,7 +18,7 @@ class DB
     //     if (!empty($arg[0]) && is_array($arg[0])) {
     //         foreach ($arg[0] as $key => $value) {
     //             $tmp[] = "`$key` = '$value'";
-    //             //$tmp[] = sprintf("`%s`", $key, $value);
+    //             $tmp[] = sprintf("`%s`", $key, $value);
     //         }
     //         $sql = $sql . " where " . implode(" && ", $tmp);
     //     }
@@ -46,12 +46,11 @@ class DB
 
     public function all(...$arg)
     {
-        $sql = "select * from $this->table ";
+        $sql = "SELECT * FROM $this->table ";
         $sql = $this->select($sql, ...$arg);
         //echo $sql;
         return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
-
 
     public function find($arg)
     {
@@ -67,7 +66,7 @@ class DB
         echo $sql;
         return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
     }
-    
+
     function save($array)
     {
         if (isset($array['id'])) {
@@ -119,7 +118,7 @@ class DB
     // function count(...$arg)
     // {
     //     $sql = "SELECT COUNT(*) FROM `{$this->table}`";
-       
+
     //     if (!empty($arg[0]) && is_array($arg[0])) {
     //         $tmp = $this->array2sql($arg[0]);
     //         $sql = $sql . " where " . implode(" && ", $tmp);
@@ -134,7 +133,9 @@ class DB
     function count(...$arg)
     {
         $sql = "SELECT COUNT(*) FROM `{$this->table}`";
-        $sql = $this->pdo->query($sql)->fetchColumn();
+        $sql = $this->select($sql, ...$arg);
+        return $this->pdo->query($sql)->fetchColumn();
+        
     }
 
 
@@ -179,7 +180,6 @@ function dd($array)
     echo "<pre>";
     print_r($array);
     echo "</pre>";
-
 }
 
 $Student = new DB('students');
@@ -210,4 +210,4 @@ $Dept = new DB('dept');
 echo $Student->count(['dept' => 2]);
 echo "<br>";
 echo $Student->math('max', 'graduate_at');
-
+?>
