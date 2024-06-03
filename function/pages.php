@@ -26,16 +26,30 @@ include_once "base.php";
     $start = ($now - 1) * $div;
     $rows = $Student->all([], " limit $start, $div ");
 
-    foreach ($rows as $row) {
-        echo $row['name'] . "<br>";
+    // foreach ($rows as $row) {
+    // echo $row['name'] . "<br>";
+
+    foreach ($rows as $idx => $row) {
+        echo ($idx + 1) . '=>' . $row['name'] . "<br>";
+
     }
     ?>
 
     <hr>
 
     <?php
+    if ($now - 1 > 0) {
+        echo "<a href='?p=" . ($now - 1) . "'> < </a>";
+    }
+
     for ($i = 1; $i <= $pages; $i++) {
-        echo "<a href='?p= $i'> $i </a>";
+        echo "<a href='?p=$i'> $i </a>";
+    }
+
+    if ($now + 1 <= $pages) {
+        echo "<a href='?p=" . ($now + 1) . "'> > </a>";
+    } else {
+        echo ' > ';
     }
     ?>
 </body>
