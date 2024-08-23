@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+<body>
+<div>
+    <input type="text" name="code" placeholder="請輸入股票代碼">
+    <input type="button" value="查詢" onclick="stock($('input[name=code]').val());">
+</div>
+    
+<div class="stock"></div>
+<button onclick="track()">開始追踪</button>
+</body>
+</html>
+<script>
+let num=0;
+function track(){
+
+    setInterval(function(){
+        stock(num);
+    },5000);
+}
+function stock(code){
+    num=code;
+
+    $.post("stock.php",{code},function(stock){
+        console.log(stock);
+        let data=JSON.parse(stock);
+        let html=`
+            <ul>
+                <li>Code: ${data.code}</li>
+                <li>Name: ${data.name}</li>
+                <li>Price: ${data.price}</li>
+            </ul>
+        `;
+
+    $(".stock").html(html);
+    })
+}
+</script>
